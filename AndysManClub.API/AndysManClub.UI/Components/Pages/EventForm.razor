@@ -1,0 +1,64 @@
+﻿@page "/eventform"
+@using Microsoft.Extensions.Logging
+@inject ILogger<EventForm> Logger
+
+<form method="post" @onsubmit="Submit" @formname="event-form">
+    <AntiforgeryToken />
+    <div>
+        <label>
+            Identifier: @Model!.Id
+            @* <InputText @bind-Value="Model!.Id" /> *@
+        </label>
+        <label>
+            Title:
+            <InputText @bind-Value="Model!.Title" />
+        </label>
+        <label>
+            Description:
+            <InputText @bind-Value="Model!.Description" />
+        </label>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+@code {
+    [SupplyParameterFromForm]
+    public Event? Model { get; set; }
+
+    protected override void OnInitialized() => Model ??= new ();
+
+    private void Submit()
+    {
+        Logger.LogInformation("Id = {Id}", Model?.Id);
+    }
+
+    public class Event
+    {
+        public Event()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        public Guid Id { get; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+    }
+
+    // Create event
+    // Event will have
+    // Description/name/location
+    // Lead contact person => Loading from google workspace - currently logged in user
+    // Event dateTime
+
+    // View event
+    // bringing everythng back
+
+    // Register for event
+    // Add that currently logged in user to a collection on the Event
+    
+    // Can an event be 'editable' & what gets edited?
+
+    // Can an event be deleted?
+}

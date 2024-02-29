@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndysManClub.API", "AndysManClub.API\AndysManClub.API.csproj", "{58A37A5E-A7E8-47B7-BB96-08191DA1BA88}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndysManClub.API", "AndysManClub.API\AndysManClub.API.csproj", "{58A37A5E-A7E8-47B7-BB96-08191DA1BA88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndysManClub.UI", "AndysManClub.UI\AndysManClub.UI.csproj", "{08B539B9-25ED-4F26-AAB7-82E466F506C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,17 @@ Global
 		{58A37A5E-A7E8-47B7-BB96-08191DA1BA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58A37A5E-A7E8-47B7-BB96-08191DA1BA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58A37A5E-A7E8-47B7-BB96-08191DA1BA88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08B539B9-25ED-4F26-AAB7-82E466F506C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08B539B9-25ED-4F26-AAB7-82E466F506C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08B539B9-25ED-4F26-AAB7-82E466F506C5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{08B539B9-25ED-4F26-AAB7-82E466F506C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08B539B9-25ED-4F26-AAB7-82E466F506C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08B539B9-25ED-4F26-AAB7-82E466F506C5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C30E55C9-FADA-4BE2-A6C0-8FDDCE281714}
 	EndGlobalSection
 EndGlobal
