@@ -1,4 +1,39 @@
-﻿@inherits LayoutComponentBase
+﻿@using MudBlazor
+@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="MyCustomTheme" />
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+@code {
+    MudTheme MyCustomTheme = new MudTheme()
+        {
+            Palette = new PaletteLight()
+            {
+                Primary = Colors.Shades.White,
+                Secondary = Colors.Shades.Black,
+                Tertiary = Colors.Amber.Lighten1,
+                Background = Colors.Shades.Black,
+                TextPrimary = Colors.Shades.White,
+                TextSecondary = Colors.Shades.White,
+                ActionDisabledBackground = Colors.Grey.Lighten1,
+                AppbarBackground = Colors.Red.Default,
+            },
+            PaletteDark = new PaletteDark()
+            {
+                Primary = Colors.Blue.Lighten1
+            },
+
+            LayoutProperties = new LayoutProperties()
+            {
+                DrawerWidthLeft = "260px",
+                DrawerWidthRight = "300px"
+            }
+        };
+}
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+<link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
 
 <div class="page">
     <div class="sidebar">
@@ -15,3 +50,5 @@
         </article>
     </main>
 </div>
+
+<script src="_content/MudBlazor/MudBlazor.min.js"></script>
