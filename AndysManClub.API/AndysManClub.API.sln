@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndysManClub.API", "AndysManClub.API\AndysManClub.API.csproj", "{58A37A5E-A7E8-47B7-BB96-08191DA1BA88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndysManClub.UI", "AndysManClub.UI\AndysManClub.UI.csproj", "{08B539B9-25ED-4F26-AAB7-82E466F506C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndysManClub.UI", "AndysManClub.UI\AndysManClub.UI.csproj", "{08B539B9-25ED-4F26-AAB7-82E466F506C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
