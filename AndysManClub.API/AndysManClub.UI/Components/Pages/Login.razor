@@ -1,0 +1,42 @@
+﻿@page "/login"
+@using Microsoft.Extensions.Logging
+@using MudBlazor
+@inject ILogger<EventForm> Logger
+
+<h3>Login</h3>
+
+<MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+    <MudTextField T="string" Label="Username" Required="true" RequiredError="Username is required!" />
+    <MudTextField T="string" Label="Password" Required="true" RequiredError="Password is required!" />
+    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Disabled="@(!success)" Class="ml-auto" OnClick="@(()=> Submit())">Submit</MudButton>
+</MudForm>
+
+@code {
+    bool success;
+    string[] errors = { };
+    MudForm form;
+
+    [SupplyParameterFromForm]
+    public LoginModel? Model { get; set; }
+
+    DateTime date = new DateTime(2019, 11, 17);
+
+    protected override void OnInitialized() => Model ??= new LoginModel { };
+
+    private void Submit()
+    {
+        Logger.LogInformation("Congrautlations!", Model?.Id);
+    }
+
+    public class LoginModel
+    {
+        public LoginModel()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        public Guid Id { get; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+}
