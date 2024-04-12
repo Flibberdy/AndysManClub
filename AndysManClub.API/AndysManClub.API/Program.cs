@@ -1,4 +1,4 @@
-using AndysManClub.API.Models;
+using AndysManClub.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

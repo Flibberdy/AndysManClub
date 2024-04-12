@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AndysManClub.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace AndysManClub.API.Models
+namespace AndysManClub.Data
 {
     public class AMCContext : IdentityDbContext<IdentityUser>
     {
@@ -10,6 +11,10 @@ namespace AndysManClub.API.Models
             : base(options)
         {
         }
+        
+        public virtual DbSet<Person> People { get; set; }
+        
+        public virtual DbSet<AmcEvent> Events { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
