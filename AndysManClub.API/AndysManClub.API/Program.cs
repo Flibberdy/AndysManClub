@@ -1,4 +1,6 @@
 using AndysManClub.Data;
+using AndysManClub.Data.Repositories;
+using AndysManClub.Domain.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +20,8 @@ builder.Services.AddDbContext<AMCContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
         .AddEntityFrameworkStores<AMCContext>()
         .AddDefaultTokenProviders();
+
+builder.Services.AddTransient<IAmcEventRepository, AmcEventRepository>();
 
 var app = builder.Build();
 

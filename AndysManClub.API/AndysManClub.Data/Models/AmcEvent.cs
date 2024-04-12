@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace AndysManClub.Data.Models;
 
@@ -18,6 +17,29 @@ public class AmcEvent
     public DateTime? EventDateTime { get; set; }
     public bool IsActive { get; set; }
     public List<PersonEvent> Volunteers { get; set; }
+
+    // Theoretically just one person - so we could use firstordefault and return just a personevent
+    public List<PersonEvent> GetOrganisers()
+    {
+        return Volunteers.FindAll(e => e.IsOrganiser == true);
+    }
+
+    public List<PersonEvent> GetVolunteers()
+    {
+        return Volunteers.FindAll(e => e.IsOrganiser == false);
+    }
+
+    public void RegisterPerson(Person person)
+    {
+        var personEvent = new PersonEvent
+        {
+            Volunteer = person,
+            Event = this,
+            IsOrganiser = false
+        };
+
+        Volunteers.Add(personEvent);
+    }
 }
 
 
@@ -25,13 +47,13 @@ public class AmcEvent
 public class PersonEvent
 {
     public Guid Id { get; set; }
-    
+
     [ForeignKey(nameof(AmcEvent))]
     public required AmcEvent Event { get; set; }
-    
+
     [ForeignKey(nameof(Person))]
     public required Person Volunteer { get; set; }
-    
+
     public bool IsOrganiser { get; set; }
 
 }
