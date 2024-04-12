@@ -1,6 +1,10 @@
-using Microsoft.AspNetCore.Authorization;
+using AndysManClub.API.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddUserSecrets<Program>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -9,6 +13,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddRouting();
 
+builder.Services.AddDbContext<AMCContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("andysmanclub")));
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+        .AddEntityFrameworkStores<AMCContext>()
+        .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
