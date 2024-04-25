@@ -10,8 +10,8 @@
     <MudTextField T="string" Label="Title" Required="true" RequiredError="User name is required!" />
     <MudTextField T="string" Label="Description"/>
     <MudTextField T="string" Label="Location" Required="true" RequiredError="User name is required!" />
-    <MudDatePicker Label="Event Start Date" MinDate="DateTime.Today" @bind-Date="Model!.EventDateTime" />
-    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Disabled="@(!success)" Class="ml-auto" OnClick="@(()=> Submit())">Submit</MudButton>
+    <MudDatePicker Label="Event Start Date" MinDate="DateTime.Today" Color="Color.Tertiary" AdornmentColor="Color.Primary" @bind-Date="Model!.EventDateTime" />
+    <MudButton Variant="Variant.Outlined" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto" OnClick="@(()=> Submit())">Submit</MudButton>
 </MudForm>
 
 @code {

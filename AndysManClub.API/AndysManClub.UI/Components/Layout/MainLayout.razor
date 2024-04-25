@@ -8,14 +8,20 @@
 @code {
     MudTheme MyCustomTheme = new MudTheme()
         {
+            //rgb(254 201 3/var(--tw-text-opacity))
             Palette = new PaletteLight()
             {
                 Primary = Colors.Shades.White,
-                Secondary = Colors.Shades.Black,
-                Tertiary = Colors.Amber.Lighten1,
+                Secondary = Colors.Red.Default,
+                Tertiary = "#fec903",
+
                 Background = Colors.Shades.Black,
+
                 TextPrimary = Colors.Shades.White,
-                TextSecondary = Colors.Shades.White,
+                TextSecondary = Colors.Yellow.Default,
+                TextDisabled = Colors.Grey.Lighten1,
+                // Text
+
                 ActionDisabledBackground = Colors.Grey.Lighten1,
                 AppbarBackground = Colors.Red.Default,
             },

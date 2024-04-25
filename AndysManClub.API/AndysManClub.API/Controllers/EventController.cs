@@ -64,8 +64,8 @@ namespace AndysManClub.API.Controllers
 
         // What should the method signature be? Do we send a full person dto or should it be a guid
         // Then we do a look up to see if they exist?
-        [HttpPost("/{id:Guid}/volunteer")]
-        public IActionResult Post(Guid id, Person person)
+        [HttpPut("/{id:Guid}/volunteer")]
+        public IActionResult Put(Guid id, Person person)
         {
             // assume we do some auto mapping from a dto to a AmcEvent
             // and will most likely contain other information as well
@@ -73,6 +73,7 @@ namespace AndysManClub.API.Controllers
             {
                 var amcEvent = _amcEventRepository.Get(id);
                 amcEvent.RegisterPerson(person);
+                _amcEventRepository.Save();
             }
             catch (Exception ex)
             {
