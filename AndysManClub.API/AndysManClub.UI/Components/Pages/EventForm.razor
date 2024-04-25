@@ -7,11 +7,11 @@
     <label>
         Identifier: @Model!.Id
     </label>    
-    <MudTextField T="string" Label="Title" Required="true" RequiredError="User name is required!" />
+    <MudTextField T="string" Label="Title" Required="true" RequiredError="User name is required" />
     <MudTextField T="string" Label="Description"/>
-    <MudTextField T="string" Label="Location" Required="true" RequiredError="User name is required!" />
-    <MudDatePicker Label="Event Start Date" MinDate="DateTime.Today" Color="Color.Tertiary" AdornmentColor="Color.Primary" @bind-Date="Model!.EventDateTime" />
-    <MudButton Variant="Variant.Outlined" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto" OnClick="@(()=> Submit())">Submit</MudButton>
+    <MudTextField T="string" Label="Location" Required="true" RequiredError="User name is required" />
+    <MudDatePicker Label="Event Start Date" MinDate="DateTime.Today" Color="Color.Secondary" AdornmentColor="Color.Tertiary" Variant="Variant.Text"  @bind-Date="Model!.EventDateTime" />
+        <MudButton Variant="Variant.Outlined" Color="Color.Primary" Disabled="@(!success)"  Class="ml-auto" OnClick="@(()=> Submit())">Submit</MudButton>
 </MudForm>
 
 @code {
@@ -55,22 +55,4 @@
         public required string Name { get; set; }
         public required string Surname { get; set; }
     }
-
-    // Create event
-    // Event will have
-    // Description/name/location
-    // Lead contact person => Loading from google workspace - currently logged in user
-    // Event dateTime
-
-
-    // View event
-    // bringing everythng back
-
-
-    // Register for event
-    // Add that currently logged in user to a collection on the Event
-    
-    // Can an event be 'editable' & what gets edited?
-
-    // Can an event be deleted?
 }

@@ -1,8 +1,7 @@
-﻿using AndysManClub.Data;
-using AndysManClub.Data.Models;
-using AndysManClub.Data.Repositories;
+﻿using AndysManClub.Domain.DTO;
+using AndysManClub.Domain.Repositories;
 
-namespace AndysManClub.Domain.Repositories
+namespace AndysManClub.Data.Repositories
 {
     public class AmcEventRepository : IAmcEventRepository
     {
@@ -13,14 +12,14 @@ namespace AndysManClub.Domain.Repositories
             _context = amcContext ?? throw new ArgumentNullException(nameof(amcContext));
         }
 
-        public IEnumerable<AmcEvent> Get()
+        public IEnumerable<AmcEvent?> Get()
         {
             return _context.Events.Where(x => x.IsActive);
         }
 
-        public AmcEvent Get(Guid id)
+        public AmcEvent? Get(Guid id)
         {
-            return _context.Events.SingleOrDefault(x => x.Id == id);
+            return _context.Events.FirstOrDefault(x => x.Id == id);
         }
 
         public void Create(AmcEvent amcEvent)

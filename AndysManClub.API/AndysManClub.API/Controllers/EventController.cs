@@ -1,5 +1,6 @@
-﻿using AndysManClub.Data.Models;
-using AndysManClub.Data.Repositories;
+﻿using AndysManClub.Data.Repositories;
+using AndysManClub.Domain.DTO;
+using AndysManClub.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AndysManClub.API.Controllers
@@ -44,7 +45,7 @@ namespace AndysManClub.API.Controllers
 
         // should we be more explicit and have "/create" as the route?
         [HttpPost()]
-        public IActionResult Post(AmcEvent amcEvent)
+        public IActionResult Post(AmcEvent? amcEvent)
         {
             // assume we do some auto mapping from a dto to a AmcEvent
             // and will most likely contain other information as well

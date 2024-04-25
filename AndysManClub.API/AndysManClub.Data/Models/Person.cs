@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AndysManClub.Data.Models;
 
-[Table(nameof(Person))]
-public class Person : IdentityUser
-{
-    [ProtectedPersonalData]
-    public required string FirstName { get; set; }
-    [ProtectedPersonalData]
-    public required string LastName { get; set; }
-}
+// [Table(nameof(Person))]
+// public class Person : IdentityUser
+// {
+//     [ProtectedPersonalData]
+//     public required string FirstName { get; set; }
+//     [ProtectedPersonalData]
+//     public required string LastName { get; set; }
+// }

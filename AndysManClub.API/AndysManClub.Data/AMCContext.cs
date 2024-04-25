@@ -1,4 +1,5 @@
 ﻿using AndysManClub.Data.Models;
+using AndysManClub.Domain.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

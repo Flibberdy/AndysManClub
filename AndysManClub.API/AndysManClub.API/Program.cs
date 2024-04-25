@@ -21,7 +21,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
         .AddEntityFrameworkStores<AMCContext>()
         .AddDefaultTokenProviders();
 
-builder.Services.AddTransient<IAmcEventRepository, AmcEventRepository>();
+builder.Services.AddScoped<IAmcEventRepository, AmcEventRepository>();
 
 var app = builder.Build();
 

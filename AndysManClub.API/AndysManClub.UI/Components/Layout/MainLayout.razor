@@ -1,4 +1,5 @@
 ﻿@using MudBlazor
+
 @inherits LayoutComponentBase
 
 <MudThemeProvider Theme="MyCustomTheme" />
@@ -12,7 +13,7 @@
             Palette = new PaletteLight()
             {
                 Primary = Colors.Shades.White,
-                Secondary = Colors.Red.Default,
+                Secondary = Colors.BlueGrey.Default,
                 Tertiary = "#fec903",
 
                 Background = Colors.Shades.Black,
@@ -20,6 +21,9 @@
                 TextPrimary = Colors.Shades.White,
                 TextSecondary = Colors.Yellow.Default,
                 TextDisabled = Colors.Grey.Lighten1,
+                ActionDisabled = Colors.Grey.Darken1,
+                ActionDefault = Colors.BlueGrey.Default,
+                Surface = Colors.Grey.Darken4,
                 // Text
 
                 ActionDisabledBackground = Colors.Grey.Lighten1,

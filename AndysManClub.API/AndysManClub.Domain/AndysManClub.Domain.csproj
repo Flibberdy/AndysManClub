@@ -7,8 +7,4 @@
         <RootNamespace>AndysManClub.Domain</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\AndysManClub.Data\AndysManClub.Data.csproj" />
-    </ItemGroup>
-
 </Project>
