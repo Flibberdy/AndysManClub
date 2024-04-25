@@ -44,13 +44,15 @@ namespace AndysManClub.API.Controllers
         }
 
         // should we be more explicit and have "/create" as the route?
-        [HttpPost()]
+        [HttpPost]
         public IActionResult Post(AmcEvent? amcEvent)
         {
             // assume we do some auto mapping from a dto to a AmcEvent
             // and will most likely contain other information as well
             try
             {
+                ArgumentNullException.ThrowIfNull(amcEvent);
+                
                 _amcEventRepository.Create(amcEvent);
                 _amcEventRepository.Save();
             } catch (Exception ex)

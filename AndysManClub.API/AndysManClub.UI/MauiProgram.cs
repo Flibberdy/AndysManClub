@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AndysManClub.Shared;
+using Microsoft.Extensions.Logging;
 using MudBlazor.Services;
 
 namespace AndysManClub.UI
@@ -17,6 +18,8 @@ namespace AndysManClub.UI
 
             builder.Services.AddMudServices();
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddScoped<IAmcClient, AmcClient>();
+            builder.Services.AddSingleton<HttpClient>();
 
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();

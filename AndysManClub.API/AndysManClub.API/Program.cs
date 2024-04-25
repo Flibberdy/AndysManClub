@@ -1,6 +1,7 @@
 using AndysManClub.Data;
 using AndysManClub.Data.Repositories;
 using AndysManClub.Domain.Repositories;
+using AndysManClub.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddRouting();
+builder.Services.AddHttpClient<IAmcClient, AmcClient>();
 
 builder.Services.AddDbContext<AMCContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("andysmanclub")));
@@ -21,7 +23,6 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
         .AddEntityFrameworkStores<AMCContext>()
         .AddDefaultTokenProviders();
 
-builder.Services.AddScoped<IAmcEventRepository, AmcEventRepository>();
 
 var app = builder.Build();
 
