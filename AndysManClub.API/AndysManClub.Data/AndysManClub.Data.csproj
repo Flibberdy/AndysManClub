@@ -19,4 +19,8 @@
       <ProjectReference Include="..\AndysManClub.Domain\AndysManClub.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Models\" />
+    </ItemGroup>
+
 </Project>

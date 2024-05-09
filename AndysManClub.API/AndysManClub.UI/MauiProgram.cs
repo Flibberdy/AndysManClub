@@ -19,8 +19,7 @@ namespace AndysManClub.UI
             builder.Services.AddMudServices();
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddScoped<IAmcClient, AmcClient>();
-            builder.Services.AddSingleton<HttpClient>();
-
+            builder.Services.AddSingleton(_ => new HttpClient() { BaseAddress = new Uri("https://localhost:7194/api/") });
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();

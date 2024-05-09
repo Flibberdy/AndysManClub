@@ -1,15 +1,18 @@
 ﻿@page "/eventform"
+@using AndysManClub.Domain.DTO
+@using AndysManClub.Shared
 @using Microsoft.Extensions.Logging
 @using MudBlazor
 @inject ILogger<EventForm> Logger
+@inject IAmcClient _amcClient
 
 <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
     <label>
         Identifier: @Model!.Id
     </label>    
-    <MudTextField T="string" Label="Title" Required="true" RequiredError="User name is required" />
-    <MudTextField T="string" Label="Description"/>
-    <MudTextField T="string" Label="Location" Required="true" RequiredError="User name is required" />
+    <MudTextField T="string" Label="Title" Required="true" RequiredError="Title is Required" @bind-Value="Model.Title" />
+    <MudTextField T="string" Label="Description" @bind-Value="Model.Description"/>
+    <MudTextField T="string" Label="Location" Required="true" RequiredError="Location is required" @bind-Value="Model.Location" />
     <MudDatePicker Label="Event Start Date" MinDate="DateTime.Today" Color="Color.Secondary" AdornmentColor="Color.Tertiary" Variant="Variant.Text"  @bind-Date="Model!.EventDateTime" />
         <MudButton Variant="Variant.Outlined" Color="Color.Primary" Disabled="@(!success)"  Class="ml-auto" OnClick="@(()=> Submit())">Submit</MudButton>
 </MudForm>
@@ -20,39 +23,38 @@
     MudForm form;
 
     [SupplyParameterFromForm]
-    public Event? Model { get; set; }
+    public AmcEvent? Model { get; set; }
 
     DateTime date = new DateTime(2019,11,17);
 
-    protected override void OnInitialized() => Model ??= new Event { LeadContactPerson = new Person { Name = "Dan", Surname = "Du Preez"} };
+    protected override void OnInitialized() => Model ??= new AmcEvent
+    {
+        Title = string.Empty,
+        Location = string.Empty
+
+};
 
     private void Submit()
     {
-        Logger.LogInformation("Id = {Id}", Model?.Id);
-        Logger.LogInformation("Id = {Id}", Model?.LeadContactPerson.Name);
-        Logger.LogInformation("Id = {Id}", Model?.LeadContactPerson.Surname);
-    }
-
-    public class Event
-    {
-        public Event()
+        if (Model == null)
         {
-            Id = Guid.NewGuid();
+            return;
         }
 
-        public Guid Id { get; }
-        public string Title { get; set; }
-        public string? Description { get; set; }
-        public string Location { get; set; }
-        public Person LeadContactPerson { get; set; } //Person object
-        public DateTime? EventDateTime { get; set; }
-        public bool IsActive { get; set; }
-        public ICollection<Person> Volunteers { get; set; }
-    }
-
-    public class Person
-    {
-        public required string Name { get; set; }
-        public required string Surname { get; set; }
+        Model.Volunteers = new List<PersonEvent>
+        {
+            new()
+            {
+                Event = Model,
+                Volunteer = new Person()
+                {
+                    FirstName = "Dan",
+                    LastName = "du Preez"
+                },
+                IsOrganiser = true
+            }
+        };
+        
+        _amcClient.CreateEvent(Model);
     }
 }

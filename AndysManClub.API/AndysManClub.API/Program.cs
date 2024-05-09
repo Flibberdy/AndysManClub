@@ -15,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddRouting();
-builder.Services.AddHttpClient<IAmcClient, AmcClient>();
+builder.Services.AddScoped<IAmcEventRepository, AmcEventRepository>();
 
 builder.Services.AddDbContext<AMCContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("andysmanclub")));

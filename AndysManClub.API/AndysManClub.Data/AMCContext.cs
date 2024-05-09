@@ -1,5 +1,4 @@
-﻿using AndysManClub.Data.Models;
-using AndysManClub.Domain.DTO;
+﻿using AndysManClub.Domain.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +12,7 @@ namespace AndysManClub.Data
         {
         }
         
-        public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<PersonEvent> People { get; set; }
         
         public virtual DbSet<AmcEvent> Events { get; set; }
 
