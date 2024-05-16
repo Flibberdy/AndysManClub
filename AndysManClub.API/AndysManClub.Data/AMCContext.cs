@@ -1,4 +1,4 @@
-﻿using AndysManClub.Domain.DTO;
+﻿using AndysManClub.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -11,34 +11,35 @@ namespace AndysManClub.Data
             : base(options)
         {
         }
-        
-        public virtual DbSet<EventVolunteers> People { get; set; }
-        
+
+        public virtual DbSet<Person> People { get; set; }
+
         public virtual DbSet<AmcEvent> Events { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Person>(entity =>
             {
+                entity.HasMany<AmcEvent>(x => x.Events)
+                    .WithMany(x => x.Volunteers);
             });
 
             builder.Entity<AmcEvent>(entity =>
             {
+                entity.HasMany<Person>(x => x.Volunteers)
+                    .WithMany(x => x.Events);
             });
 
-            builder.Entity<PersonEvent>(entity =>
-            {
-                entity.HasOne(x => x.Event)
-                    .WithMany(x => x.Volunteers)
-                    .HasForeignKey(x => x.Event)
-                    .HasConstraintName("FK_PersonEvent_AmcEvent_AmcEvent");
+            //modelBuilder.Entity<Student>()
+            //        .HasMany<Course>(s => s.Courses)
+            //        .WithMany(c => c.Students)
+            //        .Map(cs =>
+            //        {
+            //            cs.MapLeftKey("StudentRefId");
+            //            cs.MapRightKey("CourseRefId");
+            //            cs.ToTable("StudentCourse");
+            //        });
 
-                entity.HasOne(x => x.Volunteer)
-                    .WithMany(x => x.Volunteers)
-                    .HasForeignKey(x => x.Volunteer)
-                    .HasConstraintName("FK_PersonEvent_Person_Person");
-
-            });
 
             base.OnModelCreating(builder);
             // Customize the ASP.NET Core Identity model and override the defaults if needed.

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AndysManClub.Domain.DTO;
+using AndysManClub.Domain.AggregateRoot;
 
 namespace AndysManClub.Shared;
 

@@ -22,6 +22,21 @@ namespace AndysManClub.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AmcEventPerson", b =>
+                {
+                    b.Property<Guid>("EventsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("VolunteersId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("EventsId", "VolunteersId");
+
+                    b.HasIndex("VolunteersId");
+
+                    b.ToTable("AmcEventPerson");
+                });
+
             modelBuilder.Entity("AndysManClub.Data.Models.AmcEvent", b =>
                 {
                     b.Property<Guid>("Id")
@@ -41,37 +56,35 @@ namespace AndysManClub.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("OrganiserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AmcEvent");
+                    b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("AndysManClub.Data.Models.PersonEvent", b =>
+            modelBuilder.Entity("AndysManClub.Data.Models.Person", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AmcEvent")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsOrganiser")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Person")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AmcEvent");
-
-                    b.HasIndex("Person");
-
-                    b.ToTable("PersonEvent");
+                    b.ToTable("People");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -189,8 +202,6 @@ namespace AndysManClub.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -274,36 +285,19 @@ namespace AndysManClub.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("AndysManClub.Data.Models.Person", b =>
+            modelBuilder.Entity("AmcEventPerson", b =>
                 {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("Person");
-                });
-
-            modelBuilder.Entity("AndysManClub.Data.Models.PersonEvent", b =>
-                {
-                    b.HasOne("AndysManClub.Data.Models.AmcEvent", "Event")
-                        .WithMany("Volunteers")
-                        .HasForeignKey("AmcEvent")
+                    b.HasOne("AndysManClub.Data.Models.AmcEvent", null)
+                        .WithMany()
+                        .HasForeignKey("EventsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AndysManClub.Data.Models.Person", "Volunteer")
+                    b.HasOne("AndysManClub.Data.Models.Person", null)
                         .WithMany()
-                        .HasForeignKey("Person");
-
-                    b.Navigation("Event");
-
-                    b.Navigation("Volunteer");
+                        .HasForeignKey("VolunteersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -355,20 +349,6 @@ namespace AndysManClub.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AndysManClub.Data.Models.Person", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
-                        .WithOne()
-                        .HasForeignKey("AndysManClub.Data.Models.Person", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AndysManClub.Data.Models.AmcEvent", b =>
-                {
-                    b.Navigation("Volunteers");
                 });
 #pragma warning restore 612, 618
         }

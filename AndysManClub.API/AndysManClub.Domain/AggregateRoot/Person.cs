@@ -1,4 +1,4 @@
-namespace AndysManClub.Domain.DTO;
+namespace AndysManClub.Domain.AggregateRoot;
 
 public class Person
 {
@@ -6,6 +6,4 @@ public class Person
 
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
-    public List<PersonEvent> Volunteers { get; set; } // better name?
-
 }

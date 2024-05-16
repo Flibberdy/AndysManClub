@@ -1,7 +1,9 @@
 using AndysManClub.Data;
+using AndysManClub.Data.Mapper;
 using AndysManClub.Data.Repositories;
+using AndysManClub.Domain.Mapper;
 using AndysManClub.Domain.Repositories;
-using AndysManClub.Shared;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +18,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddRouting();
 builder.Services.AddScoped<IAmcEventRepository, AmcEventRepository>();
+
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new PersonMap());
+    mc.AddProfile(new AmcEventMap());
+    mc.AddProfile(new CreateAmcEvent());
+});
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 builder.Services.AddDbContext<AMCContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("andysmanclub")));

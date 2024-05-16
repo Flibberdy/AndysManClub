@@ -1,6 +1,8 @@
 ﻿using AndysManClub.Data.Repositories;
-using AndysManClub.Domain.DTO;
+using AndysManClub.Domain.AggregateRoot;
 using AndysManClub.Domain.Repositories;
+using AndysManClub.Shared.Dto;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AndysManClub.API.Controllers
@@ -10,10 +12,12 @@ namespace AndysManClub.API.Controllers
     public class EventController : Controller
     {
         private readonly IAmcEventRepository _amcEventRepository;
+        private readonly IMapper _mapper;
 
-        public EventController(IAmcEventRepository amcEventRepository)
+        public EventController(IAmcEventRepository amcEventRepository, IMapper mapper)
         {
             _amcEventRepository = amcEventRepository ?? throw new ArgumentNullException(nameof(amcEventRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
 
@@ -45,16 +49,16 @@ namespace AndysManClub.API.Controllers
 
         // should we be more explicit and have "/create" as the route?
         [HttpPost]
-        public IActionResult Post(AmcEvent? amcEvent)
+        public async Task<IActionResult> PostAsync(CreateAmcEventDto amcEvent)
         {
             // assume we do some auto mapping from a dto to a AmcEvent
             // and will most likely contain other information as well
             try
             {
                 ArgumentNullException.ThrowIfNull(amcEvent);
-                
-                _amcEventRepository.Create(amcEvent);
-                _amcEventRepository.Save();
+
+                _amcEventRepository.Create(_mapper.Map<CreateAmcEventDto, AmcEvent>(amcEvent));
+                await _amcEventRepository.Save();
             } catch (Exception ex)
             {
                 // What do we return here?
