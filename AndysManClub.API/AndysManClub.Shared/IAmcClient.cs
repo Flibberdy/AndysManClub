@@ -1,8 +1,9 @@
 ﻿using AndysManClub.Domain.AggregateRoot;
+using AndysManClub.Shared.Dto;
 
 namespace AndysManClub.Shared;
 
 public interface IAmcClient
 {
-    Task<ApiResponse<AmcEvent>> CreateEvent(AmcEvent amcEvent);
+    Task<ApiResponse<List<string>>> CreateEvent(CreateAmcEventDto amcEvent);
 }

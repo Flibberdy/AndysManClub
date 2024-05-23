@@ -7,5 +7,6 @@
         public string? Description { get; set; }
         public required string Location { get; set; }
         public DateTime? EventDateTime { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }

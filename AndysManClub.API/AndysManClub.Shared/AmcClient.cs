@@ -2,6 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AndysManClub.Domain.AggregateRoot;
+using AndysManClub.Shared.Dto;
 
 namespace AndysManClub.Shared;
 
@@ -14,25 +15,25 @@ public class AmcClient : IAmcClient
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
     }
 
-    public async Task<ApiResponse<AmcEvent>> CreateEvent(AmcEvent amcEvent)
+    public async Task<ApiResponse<List<string>>> CreateEvent(CreateAmcEventDto amcEvent)
     {
         var content = new StringContent(JsonSerializer.Serialize(amcEvent), Encoding.UTF8, "application/json");
 
         var response = await _httpClient.PostAsync("Event", content);
 
-        if (response.IsSuccessStatusCode)
+        if (!response.IsSuccessStatusCode)
         {
-            return new ApiResponse<AmcEvent>
+            return new ApiResponse<List<string>>
             {
-                Success = true,
-                Data = amcEvent
+                Success = false,
+                Errors = [response.ReasonPhrase ?? "Unknown error"]
             };
         }
 
-        return new ApiResponse<AmcEvent>
+        return new ApiResponse<List<string>>()
         {
-            Success = false,
-            Errors = [response.ReasonPhrase ?? "Unknown error"]
+            Success = true,
+            Data = new List<string>()
         };
     }
 }

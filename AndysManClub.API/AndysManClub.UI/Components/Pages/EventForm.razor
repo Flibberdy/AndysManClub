@@ -1,19 +1,17 @@
 ﻿@page "/eventform"
-@using AndysManClub.Domain.DTO
 @using AndysManClub.Shared
+@using AndysManClub.Shared.Dto
 @using Microsoft.Extensions.Logging
 @using MudBlazor
 @inject ILogger<EventForm> Logger
 @inject IAmcClient _amcClient
 
 <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-    <label>
-        Identifier: @Model!.Id
-    </label>    
     <MudTextField T="string" Label="Title" Required="true" RequiredError="Title is Required" @bind-Value="Model.Title" />
     <MudTextField T="string" Label="Description" @bind-Value="Model.Description"/>
     <MudTextField T="string" Label="Location" Required="true" RequiredError="Location is required" @bind-Value="Model.Location" />
     <MudDatePicker Label="Event Start Date" MinDate="DateTime.Today" Color="Color.Secondary" AdornmentColor="Color.Tertiary" Variant="Variant.Text"  @bind-Date="Model!.EventDateTime" />
+    <MudCheckBox Label="Active" @bind-Value="Model.IsActive"></MudCheckBox>
         <MudButton Variant="Variant.Outlined" Color="Color.Primary" Disabled="@(!success)"  Class="ml-auto" OnClick="@(()=> Submit())">Submit</MudButton>
 </MudForm>
 
@@ -22,17 +20,14 @@
     string[] errors = { };
     MudForm form;
 
-    [SupplyParameterFromForm]
-    public AmcEvent? Model { get; set; }
+    [SupplyParameterFromForm] public CreateAmcEventDto? Model { get; set; }
 
-    DateTime date = new DateTime(2019,11,17);
-
-    protected override void OnInitialized() => Model ??= new AmcEvent
+    protected override void OnInitialized() => Model ??= new CreateAmcEventDto
     {
         Title = string.Empty,
         Location = string.Empty
 
-};
+    };
 
     private void Submit()
     {
@@ -41,20 +36,7 @@
             return;
         }
 
-        Model.Volunteers = new List<PersonEvent>
-        {
-            new()
-            {
-                Event = Model,
-                Volunteer = new Person()
-                {
-                    FirstName = "Dan",
-                    LastName = "du Preez"
-                },
-                IsOrganiser = true
-            }
-        };
-        
         _amcClient.CreateEvent(Model);
     }
+
 }
