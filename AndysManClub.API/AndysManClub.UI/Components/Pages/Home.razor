@@ -1,5 +1,32 @@
 ﻿@page "/"
+@using AndysManClub.Shared
+@using AndysManClub.Shared.Dto
+@using MudBlazor
+@inject IAmcClient _amcClient
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+<MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" Href="/EventForm"/>
+@foreach (var eventSummary in Model)
+{
+    <MudCard>
+        <MudCardContent>
+            <MudText>@eventSummary.Title</MudText>
+            <MudText Typo="Typo.body2">@eventSummary.Description</MudText>
+            <MudText>@eventSummary.Location</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Text" Color="Color.Primary" >Volunteer</MudButton>
+        </MudCardActions>
+    </MudCard>
+}
+
+@code
+{
+    public List<ViewAmcEventSummaryDto> Model { get; set; }
+
+    protected override async void OnInitialized()
+    {
+        var eventSummaries = await _amcClient.GetEvents();
+        Model = eventSummaries.Data ?? [];
+    }
+}

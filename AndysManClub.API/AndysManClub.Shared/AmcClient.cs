@@ -36,4 +36,27 @@ public class AmcClient : IAmcClient
             Data = new List<string>()
         };
     }
+
+    public async Task<ApiResponse<List<ViewAmcEventSummaryDto>>> GetEvents()
+    {
+        return new ApiResponse<List<ViewAmcEventSummaryDto>>
+        {
+            Success = true,
+            Data = new List<ViewAmcEventSummaryDto>()
+            {
+                new ViewAmcEventSummaryDto()
+                {
+                    Title = "The best title",
+                    Location = "Another Location",
+                    Description = "The best description"
+                },
+                new ViewAmcEventSummaryDto()
+                {
+                    Title = "The second best title",
+                    Location = "A different Location",
+                    Description = "The second best description"
+                }
+            }
+        };
+    }
 }
