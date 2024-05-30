@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AndysManClub.Domain.AggregateRoot;
 using AndysManClub.Shared.Dto;
 
 namespace AndysManClub.Shared;
@@ -39,24 +38,27 @@ public class AmcClient : IAmcClient
 
     public async Task<ApiResponse<List<ViewAmcEventSummaryDto>>> GetEvents()
     {
+        
+        var response = await _httpClient.GetAsync("Event");
+
+        if (!response.IsSuccessStatusCode)
+            return new ApiResponse<List<ViewAmcEventSummaryDto>>
+            {
+                Success = false,
+                Errors = [response.ReasonPhrase ?? "Unknown Error"]
+            };
+
+        var tmp = await response.Content.ReadAsStringAsync();
+        
+        var events =
+            await JsonSerializer.DeserializeAsync<List<ViewAmcEventSummaryDto>>(
+                await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
+
         return new ApiResponse<List<ViewAmcEventSummaryDto>>
         {
             Success = true,
-            Data = new List<ViewAmcEventSummaryDto>()
-            {
-                new ViewAmcEventSummaryDto()
-                {
-                    Title = "The best title",
-                    Location = "Another Location",
-                    Description = "The best description"
-                },
-                new ViewAmcEventSummaryDto()
-                {
-                    Title = "The second best title",
-                    Location = "A different Location",
-                    Description = "The second best description"
-                }
-            }
+            Data = events
         };
+
     }
 }

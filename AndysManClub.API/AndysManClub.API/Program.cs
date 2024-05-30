@@ -24,6 +24,7 @@ var mapperConfig = new MapperConfiguration(mc =>
     mc.AddProfile(new PersonMap());
     mc.AddProfile(new AmcEventMap());
     mc.AddProfile(new CreateAmcEvent());
+    mc.AddProfile(new ViewAmcEventSummary());
 });
 
 IMapper mapper = mapperConfig.CreateMapper();

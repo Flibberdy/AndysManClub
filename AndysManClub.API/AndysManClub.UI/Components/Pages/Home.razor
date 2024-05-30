@@ -22,11 +22,12 @@
 
 @code
 {
-    public List<ViewAmcEventSummaryDto> Model { get; set; }
+    public List<ViewAmcEventSummaryDto> Model { get; set; } = new();
 
     protected override async void OnInitialized()
     {
         var eventSummaries = await _amcClient.GetEvents();
         Model = eventSummaries.Data ?? [];
+        StateHasChanged();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AndysManClub.Domain.AggregateRoot;
+using AndysManClub.Shared.Dto;
 using AutoMapper;
 
 namespace AndysManClub.Data.Mapper
@@ -8,6 +9,14 @@ namespace AndysManClub.Data.Mapper
         public AmcEventMap()
         {
             CreateMap<Data.Models.AmcEvent, AmcEvent>().ReverseMap();
+        }
+    }
+    
+    public class ViewAmcEventSummary : Profile
+    {
+        public ViewAmcEventSummary()
+        {
+            CreateMap<Models.AmcEvent, ViewAmcEventSummaryDto>().ReverseMap();
         }
     }
 }

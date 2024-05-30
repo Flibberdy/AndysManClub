@@ -1,4 +1,5 @@
 ﻿using AndysManClub.Domain.Repositories;
+using AndysManClub.Shared.Dto;
 using AutoMapper;
 using AmcEvent = AndysManClub.Domain.AggregateRoot.AmcEvent;
 
@@ -15,10 +16,10 @@ namespace AndysManClub.Data.Repositories
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public IEnumerable<AmcEvent?> Get()
+        public List<ViewAmcEventSummaryDto> Get()
         {
             var events = _context.Events.Where(x => x.IsActive);
-            return _mapper.Map<IEnumerable<Models.AmcEvent>, IEnumerable<AmcEvent>>(events);
+            return _mapper.Map<List<Models.AmcEvent>, List<ViewAmcEventSummaryDto>>(events.ToList());
         }
 
         public AmcEvent? Get(Guid id)

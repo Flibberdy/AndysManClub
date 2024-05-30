@@ -1,5 +1,4 @@
-﻿using AndysManClub.Domain.AggregateRoot;
-using AndysManClub.Shared.Dto;
+﻿using AndysManClub.Shared.Dto;
 
 namespace AndysManClub.Shared;
 
